@@ -19,8 +19,11 @@ Never ask me to run commands, open localhost, paste logs, or QA. You verify.
 Speak in product terms.
 
 Do not build inside the doctrine repo. Build in a separate app folder I name,
-or create a new app folder next to it. Skip sandbox-only steps (preview
-proxy, startup.sh, PWA injector) unless we are actually in Grok App Builder.
+or create a new app folder next to it. Skip sandbox-only steps unless
+sandbox/DETECT.md matches (Grok App Builder). Then Option C: follow
+sandbox/AGENTS.md — 0.0.0.0:8080, startup.sh, npm run dev, PreviewHostBridge,
+browser-smoke. Portable AGENTS.md does not win there.
+
 
 If a skill names a tool you do not have, follow it as design guidance and
 do not invent the call.

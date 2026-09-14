@@ -27,4 +27,7 @@ SKILLS (open the file, don't dump all rules):
 
 If a skill names tools you lack, follow it as design guidance. Never invent tool calls. Abstract games (tetris/snake/pong/breakout) stay procedural.
 
+If you are in Grok App Builder (/workspace, live preview, 0.0.0.0:8080, public/__grok/), switch to Option C: follow sandbox/AGENTS.md — it is stricter. Portable AGENTS.md does not win there.
+
 If AGENTS.project.md exists in the app, it has equal priority.
+

@@ -1,9 +1,11 @@
-# Setup guide — both options
+# Setup guide — Options A, B, and C
 
-This kit has two install modes. Use one or both.
+This kit has three modes. Use one or combine them.
 
 - **Option A (library)** — point a Bot or Custom Agent at this GitHub repo. No copy step.
-- **Option B (project cwd)** — copy `AGENTS.md` + `.grok/skills/` into the app the coding agent will edit, so Grok Build CLI loads them automatically.
+- **Option B (project cwd)** — copy portable `AGENTS.md` + `.grok/skills/` into the app the coding agent will edit.
+- **Option C (sandbox)** — Grok App Builder live-preview environment. Follow [`sandbox/AGENTS.md`](../sandbox/AGENTS.md); it is stricter and wins.
+
 
 ---
 
@@ -137,14 +139,73 @@ First-message template: [`templates/first-message-project.md`](../templates/firs
 
 ---
 
-## Using A and B together
+## Option C — Grok App Builder sandbox
+
+Best when the agent is **inside Grok App Builder**: isolated Linux `/workspace`,
+Node 22, user can only chat and watch a live preview. Success = app running on
+**`0.0.0.0:8080`**, verified by you, `startup.sh` left in sync.
+
+If [`sandbox/DETECT.md`](../sandbox/DETECT.md) matches (three or more signals),
+**do not stay on the portable `AGENTS.md`.** Follow
+[`sandbox/AGENTS.md`](../sandbox/AGENTS.md).
+
+### C1. Confirm you belong here
+
+You should see most of: `/workspace`, `public/__grok/`, `PreviewHostBridge`,
+`scripts/browser-smoke.mjs`, `grokPwaPlugin` in Vite, instructions that the
+user has no shell.
+
+If not: use A or B.
+
+### C2. Install the sandbox contract
+
+```bash
+git clone https://github.com/Jannich113/Grok-agent-.git
+cd Grok-agent-
+./install.sh --sandbox /workspace
+```
+
+`--sandbox` with no path defaults to `/workspace` when that directory exists.
+
+What it copies:
+
+- Skills → `/workspace/.grok/skills/`
+- `sandbox/references/*.md` → `/workspace/.grok/references/`
+  (`scaffold.md`, `data-and-auth.md`, `browser-qa.md`, `deploy-target.md`,
+  `hibernate-revive.md`, `generated-art.md`)
+- `sandbox/AGENTS.md` → `/workspace/AGENTS.sandbox.md`
+- Workspace `AGENTS.md` is **left alone** if it already exists (the platform
+  often owns it). Follow the stricter of the two.
+
+### C3. First task
+
+Paste [`templates/first-message-sandbox.md`](../templates/first-message-sandbox.md).
+
+Non-negotiable on C (from `sandbox/AGENTS.md`):
+
+- Bind **`0.0.0.0:8080`**; start with **`npm run dev`** via `startup.sh`, never Vite directly
+- Keep `PreviewHostBridge` and the Grok PWA / “Created with Grok” injector
+- `curl` 200 is not done — `node scripts/browser-smoke.mjs`, inspect both screenshots
+- Never ask the user to open localhost, run commands, or QA
+- Auth/DB still off by default (§0.5 in the sandbox file)
+
+### C4. Do not git these from a live sandbox
+
+`public/__grok/`, `server/middleware/grok-pwa.ts`, `.env`, `node_modules`,
+live `.grok/app-env.json`. The kit already excluded them.
+
+---
+
+## Using A, B, and C together
+
 
 Typical split:
 
-- **Custom Agent / Bot (A)** for planning, specs, and “what should we build.”
-- **Grok Build CLI in the app (B)** for the actual code.
+- **Custom Agent / Bot (A)** for planning and “what should we build.”
+- **Grok Build CLI in the app (B)** for code on your machine.
+- **Grok App Builder (C)** when the user only has chat + live preview.
 
-Same `AGENTS.md` either way, so triage and quality stay consistent.
+Triage, auth/db-off, and skills stay the same. Only C adds preview/`startup.sh`/smoke QA.
 
 ---
 
@@ -153,8 +214,10 @@ Same `AGENTS.md` either way, so triage and quality stay consistent.
 ```bash
 cd /path/to/Grok-agent-
 git pull
-./install.sh --project /path/to/your-app    # refreshes skills
+./install.sh --project /path/to/your-app     # Option B
+./install.sh --sandbox /workspace            # Option C
 ```
+
 
 Re-read `AGENTS.app-builder.md` if your app has its own `AGENTS.md` — the
 installer will not overwrite it.
@@ -170,6 +233,9 @@ installer will not overwrite it.
 | `make a racing game` | Opens `building-games` **and** `controls`; A turns left |
 | `make it pretty` | Opens `design-ui`; tokens, no gradient-blob slop |
 | `add login` | Opens `auth`; real sign-in, no mock users |
+| On **C**: `startup.sh` missing | Agent writes/updates it and starts `npm run dev` on `0.0.0.0:8080` |
+| On **C**: “hide the Grok pill” | Refuses; branding is a project setting, not a code change |
+
 
 If a Bot still scaffolds on `hi`, the profile did not load — start a **new**
 Bot chat after saving the profile.

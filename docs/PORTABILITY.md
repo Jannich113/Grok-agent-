@@ -12,9 +12,11 @@ agents can reuse the *product* rules without the sandbox *environment*.
 - Game loop / delta time / inverted A/D
 - “You verify; the user is not QA”
 
-## Stripped from `AGENTS.md`
+## Stripped from portable `AGENTS.md` (Options A/B)
 
-These only make sense inside Grok App Builder:
+These only make sense inside Grok App Builder and live in
+**[`sandbox/AGENTS.md`](../sandbox/AGENTS.md) (Option C)**:
+
 
 - Bind `0.0.0.0:8080` and maintain `/workspace/startup.sh`
 - Never start Vite except via `npm run dev` / `scripts/with-app-env.mjs`
@@ -22,8 +24,10 @@ These only make sense inside Grok App Builder:
 - `node scripts/browser-smoke.mjs` and the `:8081` production preview gate
 - Platform-injected `DATABASE_URL` / `VITE_AUTH_ENABLED` / no `.env` files
 
-If you **are** in that sandbox, follow the sandbox `AGENTS.md` there. It is
-stricter and wins.
+If you **are** in that sandbox, that is **Option C**. Follow
+[`sandbox/AGENTS.md`](../sandbox/AGENTS.md) (and [`sandbox/DETECT.md`](../sandbox/DETECT.md)).
+It is stricter and wins over the portable file.
+
 
 ## Skills that name missing tools
 

@@ -13,6 +13,12 @@ Builder. Elsewhere: follow the product rules and skip environment you don't have
 If a skill names tools you don't have, treat it as design guidance — never invent
 tool calls. Use CSS / SVG / canvas / code-drawn art instead.
 
+**Option C switch:** if you are actually in Grok App Builder (see
+`sandbox/DETECT.md` — `/workspace`, live preview, `0.0.0.0:8080`,
+`public/__grok/`), **this portable file does not win**. Follow
+`sandbox/AGENTS.md` (or the workspace `AGENTS.md` / `AGENTS.sandbox.md`)
+instead. It is stricter.
+
 If `AGENTS.project.md` exists in the working app, follow it with the same
 priority as this file.
 
