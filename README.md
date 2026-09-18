@@ -14,6 +14,7 @@ This repo is a **doctrine kit**, not an app.
 | [`.grok/skills/`](.grok/skills/) | On-demand playbooks (`design-ui`, `building-games`, `controls`, …) |
 | [`docs/SETUP.md`](docs/SETUP.md) | Full setup for A, B, and C |
 | [`templates/`](templates/) | Copy-paste profiles and first messages |
+| [`templates/opencode-option-a.md`](templates/opencode-option-a.md) | OpenCode (Option A) — husjagt / Kanban task contract |
 | [`install.sh`](install.sh) | Option B (`--project` / `--user`) and Option C (`--sandbox`) |
 
 Not an official xAI product. Skill playbooks are adapted from Grok Build.
