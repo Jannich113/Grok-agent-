@@ -64,6 +64,23 @@ clone) as **read-only source**.
 
 ---
 
+
+
+### A4. OpenCode (Go models)
+
+OpenCode does not auto-load this kit. Use **Option A**: keep the kit at the
+GitHub URL and paste the contract from
+[`templates/opencode-option-a.md`](../templates/opencode-option-a.md) into the
+**app** repo’s `AGENTS.md` (or OpenCode instructions). The agent must fetch
+`AGENTS.md` + matching `.grok/skills/*/SKILL.md` from this repo before coding,
+and must not build inside the kit.
+
+Typical split with Orchestra: Grok handles triage / small tickets; OpenCode Go
+models take high complexity / uncertainty / cross-component issues, still under
+the same Option A doctrine.
+
+---
+
 ## Option B — project cwd (Grok Build CLI)
 
 Best when a coding agent’s working directory **is the app**. Grok discovers:
